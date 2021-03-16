@@ -58,12 +58,11 @@ print("##############")
 for i in days:
     df[i] = df['province'].apply(lambda x:   safe_list_get((res[(res.日期==i)&(res.国家==x)]["确诊人数"]).tolist(), 0, 0 )       )
 
-
 print(df.head())
-print(df.shape)
+print(type(df))
 
 
-df.to_excel('data/data_result666666.xlsx', sheet_name='data_result_By_Province')
+df.to_excel('data/data_result666666.xlsx', sheet_name='data_result_By_Province',index=False,header=False)
 
 
 
