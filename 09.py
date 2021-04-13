@@ -1,3 +1,6 @@
+import json
+
+import jsonpath
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -9,11 +12,22 @@ home_page =response.content.decode()
 
 # 3.使用BeautifulSoup提取疫情数据
 soup = BeautifulSoup(home_page, 'lxml')
-script = soup.find(attrs={'id': 'getListByCountryTypeService2true'})
+
+script = soup.find(attrs={'id': 'getAreaStat'})   #国内getAreaStat，国际getListByCountryTypeService2true
 
 text = script.string #用的string类型拿到了
-# print(text)
+
 
 # 4.使用正则表达式, 提取json字符串
 json_str =re.findall(r'\[.+\]', text)[0] # 取出findall列表中的第0个元素
+
+json_str=re.sub(r'provinceShortName','cityName',json_str)
 print(json_str)
+python_list = json.loads(json_str)
+provincename = jsonpath.jsonpath(python_list, "$..cityName'")
+print(provincename)
+
+confirmedCount = jsonpath.jsonpath(python_list, "$..confirmedCount'")
+print(confirmedCount)
+data_list = list(zip(provincename,confirmedCount))
+print(data_list)

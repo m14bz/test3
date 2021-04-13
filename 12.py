@@ -52,20 +52,13 @@ with open('data/corona_virus.json') as fp:   #ÎÒµÄµçÄÔÊÇĞèÒª¼ÓÉÏencoding='utf8'µ
     data_list = list(zip(countryname,confirmedCount,dateids))
     print(data_list)
 
+    print(type(data_list))
 
 
 
 
-    '''
+
     name = ['¹ú¼Ò','È·ÕïÈËÊı','ÈÕÆÚ']
     test = pd.DataFrame(columns=name,data=data_list)
     test.to_csv('data/corona_virus.csv')
 
-    '''
-    # #ÅÅĞò
-    # sorted(data_list, key=attrgetter('dateids'), reverse=True)
-    # print(data_list)
-#ÖĞÓ¢ÎÄÓ³ÉäµÄ×Öµä
-
-
-# 4 Êı¾İ¿ÉÊÓ»¯

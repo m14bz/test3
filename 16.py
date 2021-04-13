@@ -34,7 +34,7 @@ class CoronaVirusSpider(object):
         # 3.从疫情数据中，获取json格式的字符串
         json_str = re.findall(r'\[.+\]', text)[0]
         # print(json_str)
-
+        json_str = re.sub(r'provinceShortName', 'cityName', json_str)
         # 4.把json格式的字符串转化为Python类型
         data = json.loads(json_str)
         return data
@@ -80,6 +80,7 @@ class CoronaVirusSpider(object):
         # 二.解析疫情首页，获取最近一日各省疫情数据
         data = self.parse_home_page(home_page, tag_id='getAreaStat') # 与以往的代码不同，增加了parse_home_page函数的一个tag_id参数，直接调用该函数即可。
         # 三.保存疫情数据
+
         self.save(data, 'data/last_day_corona_virus_of_china.json')
 
     def craw_corona_virus_of_china(self):
@@ -126,9 +127,9 @@ class CoronaVirusSpider(object):
         return data
 
     def run(self):
-        self.craw_corona_virus_of_china()
-        self.crawl_last_day_corona_virus()
-        self.crawl_corona_virus()
+       # self.craw_corona_virus_of_china()
+        #self.crawl_last_day_corona_virus()
+        #self.crawl_corona_virus()
         self.craw_last_day_corona_virus_of_china()
 
 if __name__ == '__main__':

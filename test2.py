@@ -14,14 +14,15 @@ def parse_url(page_url,f):
     except:
         print('访问失败')
 
-    print(type(html))
+    print(html)
     #获取省或城市的信息，为避免遗漏省份，可以先将"provinceShortName"替换"cityName"再分析
-    html=re.sub(r'provinceShortName','cityName',html)
 
+    html = re.sub(r'provinceShortName', 'cityName', html)
     #再把关于中国的部分取出来
     html=re.search('{ window.getAreaStat =.+?window.getIndexRecommendList2',html)
+
     html=html.group()
-    # print(html)
+    print(html)
     cities=re.findall(r"""
     {.*?"provinceName":"(.+?)",                         #城市名称
     "currentConfirmedCount":(-?\d+),                  #现存确诊
